@@ -25,20 +25,29 @@ class Event(models.Model):
 
     title = models.CharField(max_length=255)
     category = models.CharField(
-        max_length=3, choices=CATEGORY_CHOICES, default="")
+        max_length=3, choices=CATEGORY_CHOICES, default=CATEGORY_OTHER)
     custom_category = models.CharField(max_length=64, blank=True)
     description = models.TextField(max_length=1024)
     date = models.DateField()
-    price = models.DecimalField(decimal_places=2)
-    time = models.TimeField(blank=True)
+    price = models.DecimalField(decimal_places=2, max_digits=10, default=0.00)
+    time = models.TimeField(blank=True, null=True)
     last_modified = models.DateTimeField(auto_now=True)
     date_added = models.DateTimeField(auto_now_add=True)
     venue = models.CharField(max_length=255)
-    location = models.URLField(null=True)
+    location = models.URLField(null=True, blank=True)
     img = models.ImageField(null=True, blank=True, upload_to="event_images/")
 
+    class Meta:
+        ordering = ['-date', '-time']
+        indexes = [
+            models.Index(fields=['date']),
+            models.Index(fields=['category'])
+        ]
+
     def clean(self):
-        """Custom validation to ensure that the custom category is filled
-        when the category is set to 'Other'."""
+        """Custom validation for category and price attributes."""
         if self.category == self.CATEGORY_OTHER and not self.custom_category:
             raise ValidationError("Category not specified...")
+
+        if self.price < 0:
+            raise ValidationError('Price can\'t be negative')
