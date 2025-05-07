@@ -82,8 +82,11 @@ INTERNAL_IPS = [
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db.sqlite3',
+        'ENGINE': 'django.db.backends.mysql',
+        'NAME': 'areeb_event_sys_dev_db',
+        'USER': 'areeb_event_sys_dev',
+        'HOST': 'localhost',
+        'PASSWORD': 'Areeb_event_sys_dev_pwd123'
     }
 }
 
