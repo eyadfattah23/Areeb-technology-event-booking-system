@@ -1,6 +1,7 @@
 """Module to define Event class"""
 from django.db import models
 from django.core.exceptions import ValidationError
+from Config.settings import AUTH_USER_MODEL
 
 
 class Event(models.Model):
@@ -36,6 +37,9 @@ class Event(models.Model):
     venue = models.CharField(max_length=255)
     location = models.URLField(null=True, blank=True)
     img = models.ImageField(null=True, blank=True, upload_to="event_images/")
+
+    creator = models.ForeignKey(
+        AUTH_USER_MODEL, on_delete=models.SET_NULL, related_name="created_events", null=True)
 
     class Meta:
         ordering = ['-date', '-time']
