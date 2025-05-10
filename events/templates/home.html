@@ -1,0 +1,60 @@
+{% extends "base.html" %}
+{% block content %}
+<div class="events-container">
+    <h1 class="mb-4" style="width: 100%;">Upcoming Events</h1>
+    <br>
+    {% if events %}
+    {% for event in events %}
+    <div class="event-card">
+        {% if event.img %}
+        <img src="{{ event.img.url }}" alt="{{ event.title }} image" class="event-image">
+        {% else %}
+        <div class="event-image-placeholder">
+            <i class="fas fa-calendar-alt fa-3x"></i>
+        </div>
+        {% endif %}
+        
+        <div class="event-content">
+            <h3>{{ event.title }}</h3>
+            {% if event.category != "OTH" %}
+                <span class="event-category">{{ event.get_category_display }}</span>
+            {% else %}
+                <span class="event-category">{{ event.custom_category }}</span>
+            {% endif %}
+            
+            <div class="event-meta">
+                <span class="event-date">
+                    <i class="fas fa-calendar"></i>
+                    {{ event.date|date:"M d, Y" }}
+                    {% if event.time %} at {{ event.time|time:"g:i A" }}{% endif %}
+                </span>
+                <span class="event-venue">
+                    <i class="fas fa-map-marker-alt"></i>
+                    {{ event.venue }}
+                </span>
+            </div>
+            
+            <p class="event-description">
+                {{ event.description|truncatewords:25 }}
+            </p>
+            
+            <div class="event-footer">
+                <span class="event-price">
+                    {% if event.price > 0 %}
+                        ${{ event.price }}
+                    {% else %}
+                        FREE
+                    {% endif %}
+                </span>
+                <a href="#" class="btn-details">View Details</a>
+            </div>
+        </div>
+    </div>
+    {% endfor %}
+    {% else %}
+        <div class="alert alert-info">
+            No events available yet. Check back soon!
+        </div>
+    {% endif %}
+</div>
+{% endblock content %}
