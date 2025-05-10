@@ -12,15 +12,27 @@ class Event(models.Model):
     CATEGORY_CONFERENCE = 'CON'
     CATEGORY_WORKSHOP = 'WKS'
     CATEGORY_SEMINAR = 'SEM'
+    CATEGORY_MUSIC = 'MUS'
+    CATEGORY_EDUCATION = 'EDU'
+    CATEGORY_ART = 'ART'
+    CATEGORY_TECH = 'TEC'
+    CATEGORY_CULTURE = 'CUL'
+    CATEGORY_EXHIBITION = 'EXH'
     CATEGORY_OTHER = 'OTH'
 
     CATEGORY_CHOICES = [
-        (CATEGORY_FESTIVAL, 'Festival'),
         (CATEGORY_PARTY, 'Party'),
         (CATEGORY_SPORT, 'Sports events'),
         (CATEGORY_CONFERENCE, 'Conferences'),
         (CATEGORY_WORKSHOP, 'Workshop'),
         (CATEGORY_SEMINAR, 'Seminar'),
+        (CATEGORY_MUSIC, 'Music'),
+        (CATEGORY_EDUCATION, 'Education'),
+        (CATEGORY_ART, 'Art'),
+        (CATEGORY_TECH, 'Technology'),
+        (CATEGORY_CULTURE, 'Culture'),
+        (CATEGORY_FESTIVAL, 'Festival'),
+        (CATEGORY_EXHIBITION, 'Exhibition'),
         (CATEGORY_OTHER, 'Other (Please specify...)'),
     ]
 
