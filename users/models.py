@@ -17,6 +17,9 @@ class CustomUser(AbstractUser):
             models.Index(fields=['username'])
         ]
 
+    def __str__(self):
+        return f"{self.username} | id: {self.id}"
+
 
 class Booking(models.Model):
     """Model to represent a booking"""

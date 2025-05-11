@@ -36,7 +36,7 @@ class Event(models.Model):
         (CATEGORY_OTHER, 'Other (Please specify...)'),
     ]
 
-    title = models.CharField(max_length=255)
+    title = models.CharField(max_length=255, unique=True)
     category = models.CharField(
         max_length=3, choices=CATEGORY_CHOICES, default=CATEGORY_OTHER)
     custom_category = models.CharField(max_length=64, blank=True)
@@ -59,6 +59,9 @@ class Event(models.Model):
             models.Index(fields=['date']),
             models.Index(fields=['category'])
         ]
+
+    def __str__(self):
+        return f"{self.title} | id: {self.id}"
 
     def clean(self):
         """Custom validation for category and price attributes."""
