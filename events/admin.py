@@ -2,7 +2,14 @@ from django.contrib import admin
 
 from datetime import timezone
 from .models import *
+from users.models import Booking
 # Register your models here.
+
+
+class EventBookingInline(admin.TabularInline):
+    autocomplete_fields = ['user']
+    model = Booking
+    extra = 1
 
 
 @admin.register(Event)
@@ -17,3 +24,5 @@ class EventAdmin(admin.ModelAdmin):
                      'title__iendswith', 'creator__username__istartswith']
 
     list_filter = ['price', 'date', 'category', 'time']
+    autocomplete_fields = ['creator']
+    inlines = [EventBookingInline]

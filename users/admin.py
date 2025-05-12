@@ -19,3 +19,4 @@ class BookingAdmin(admin.ModelAdmin):
                     'event__id', 'event__title', 'booking_date']
 
     list_select_related = ['user', 'event']
+    autocomplete_fields = ['user', 'event']
