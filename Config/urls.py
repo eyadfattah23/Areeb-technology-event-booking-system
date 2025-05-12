@@ -25,6 +25,6 @@ admin.site.site_header = 'Areeb project admin page'
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('playground/', include('playground.urls')),
-    path('', include('events.urls')),
+    path('api/', include('events.urls')),
     path('__debug__/', include(debug_toolbar.urls))
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

@@ -15,8 +15,10 @@ class CustomUserAdmin(admin.ModelAdmin):
 
 @admin.register(Booking)
 class BookingAdmin(admin.ModelAdmin):
-    list_display = ['user__id', 'user__username',
+    list_display = ['user__id', 'user__username', 'user__email',
                     'event__id', 'event__title', 'booking_date']
 
     list_select_related = ['user', 'event']
     autocomplete_fields = ['user', 'event']
+    search_fields = ['event__id', 'event__title',
+                     'user__username', 'user__email']

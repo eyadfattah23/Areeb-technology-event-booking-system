@@ -1,7 +1,8 @@
 """Module to define Event class"""
 import datetime
-from django.db import models
+from django.utils import timezone
 from django.core.exceptions import ValidationError
+from django.db import models
 from Config.settings import AUTH_USER_MODEL
 
 
@@ -71,6 +72,6 @@ class Event(models.Model):
 
         if self.price < 0:
             raise ValidationError('Price can\'t be negative')
-        if (self.date == datetime.date.today() and self.time <= datetime.datetime.now()) or self.date < datetime.date.today():
+        if (self.date == datetime.date.today() and self.time <= timezone.now().time()) or self.date < datetime.date.today():
             raise ValidationError(
                 'Date and time must be in future not in the past')
