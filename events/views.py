@@ -1,7 +1,8 @@
 from django.db.models import Exists, OuterRef, Count
-from rest_framework.viewsets import ModelViewSet
 from django_filters.rest_framework import DjangoFilterBackend
 from rest_framework.filters import SearchFilter, OrderingFilter
+from rest_framework.viewsets import ModelViewSet
+from rest_framework.pagination import PageNumberPagination
 from .models import Event
 from .permissions import *
 from .serializers import *
@@ -12,12 +13,13 @@ from .filters import EventFilter
 
 class EventViewSet(ModelViewSet):
 
-    serializer_class = EventSerialzer
     filter_backends = [DjangoFilterBackend, OrderingFilter, SearchFilter]
     filterset_class = EventFilter
-    search_fields = ['title', 'description']
     ordering_fields = ['price', 'date', 'time']
     permission_classes = [IsEventOwnerOrAdmin]
+    pagination_class = PageNumberPagination
+    search_fields = ['title', 'description']
+    serializer_class = EventSerialzer
 
     def get_queryset(self):
         query_set = Event.objects\

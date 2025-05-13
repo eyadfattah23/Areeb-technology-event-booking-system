@@ -1,6 +1,4 @@
 from .models import *
-
-
 from rest_framework import serializers
 
 
@@ -24,12 +22,12 @@ class EventBookingSerializer(serializers.ModelSerializer):
         read_only=True,
         view_name='user-detail'
     ) """
+    user = serializers.StringRelatedField()
 
     class Meta:
         model = Booking
         fields = [
             'user',
-            'event',
             'booking_date'
         ]
         read_only_fields = ['event', 'user']

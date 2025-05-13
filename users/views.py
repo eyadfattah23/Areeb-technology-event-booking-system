@@ -1,6 +1,7 @@
 from django.shortcuts import get_object_or_404
 from rest_framework.generics import RetrieveDestroyAPIView
 from rest_framework.generics import ListCreateAPIView
+from rest_framework.permissions import IsAuthenticated
 from .models import Booking
 from .permissions import *
 from .serializers import *
@@ -17,6 +18,7 @@ class BookingRetrieveDestroyAPIView(RetrieveDestroyAPIView):
 
 class EventBookingList(ListCreateAPIView):
     serializer_class = EventBookingSerializer
+    permission_classes = [IsAuthenticated]
 
     def get_queryset(self):
         event = get_object_or_404(Event, pk=self.kwargs['pk'])

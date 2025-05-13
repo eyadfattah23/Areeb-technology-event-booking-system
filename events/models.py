@@ -56,7 +56,7 @@ class Event(models.Model):
         AUTH_USER_MODEL, on_delete=models.SET_NULL, related_name="created_events", null=True)
 
     class Meta:
-        ordering = ['-date', '-time']
+        ordering = ['price', 'date']
         indexes = [
             models.Index(fields=['date']),
             models.Index(fields=['category'])
