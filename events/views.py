@@ -19,7 +19,7 @@ class EventViewSet(ModelViewSet):
     permission_classes = [IsEventOwnerOrAdmin]
     pagination_class = PageNumberPagination
     search_fields = ['title', 'description']
-    serializer_class = EventSerialzer
+    serializer_class = EventSerializer
 
     def get_queryset(self):
         query_set = Event.objects\
@@ -48,11 +48,11 @@ def event_list(request):
             'bookings').select_related('creator').annotate(
             is_booked=Exists(bookings_subquery))
 
-        serializer = EventSerialzer(
+        serializer = EventSerializer(
             query_set, many=True, context={'request': request})
         return Response(serializer.data)
     elif request.method == "POST":
-        serializer = EventSerialzer(data=request.data)
+        serializer = EventSerializer(data=request.data)
         serializer.is_valid(raise_exception=True)
         serializer.save(creator=request.user)
         return Response(serializer.data, status=201)
@@ -61,6 +61,6 @@ def event_list(request):
 @api_view(['GET', 'PUT', 'PATCH'])
 def event_details(request, id):
     event = get_object_or_404(Event, pk=id)
-    serializer = EventSerialzer(event, context={'request': request})
+    serializer = EventSerializer(event, context={'request': request})
     return Response(serializer.data)
  """

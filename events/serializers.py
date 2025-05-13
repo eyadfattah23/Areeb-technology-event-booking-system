@@ -2,7 +2,7 @@ from rest_framework import serializers
 from .models import Event
 
 
-class EventSerialzer(serializers.ModelSerializer):
+class EventSerializer(serializers.ModelSerializer):
     creator = serializers.StringRelatedField()
 
     number_of_bookings = serializers.IntegerField()
