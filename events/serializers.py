@@ -5,17 +5,17 @@ from .models import Event
 class EventSerialzer(serializers.ModelSerializer):
     creator = serializers.StringRelatedField()
 
-    number_of_bookings = serializers.SerializerMethodField()
-    is_booked = serializers.BooleanField(read_only=True)
+    number_of_bookings = serializers.IntegerField()
+    is_booked = serializers.BooleanField()
 
-    def get_number_of_bookings(self, event: Event):
+    """ def get_number_of_bookings(self, event: Event):
         return event.bookings.count()
-
-    def get_is_booked(self, event: Event):
+ """
+    """ def get_is_booked(self, event: Event):
         request = self.context.get('request')
         if request and request.user.is_authenticated:
             return event.bookings.filter(user=request.user).exists()
-        return False
+        return False """
 
     class Meta:
         model = Event

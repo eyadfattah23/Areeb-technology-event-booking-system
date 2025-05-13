@@ -11,4 +11,4 @@ class IsBookingOwnerOrAdmin(BasePermission):
     def has_object_permission(self, request, view, obj):
         """Check if the user has permission to access the object."""
         return ((request.user.is_authenticated) and (
-            obj.user.id == request.user.id)) or (request.user.is_staff)
+            obj.user == request.user)) or (request.user.is_staff)
