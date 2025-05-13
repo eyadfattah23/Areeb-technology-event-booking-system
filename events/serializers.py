@@ -5,8 +5,8 @@ from .models import Event
 class EventSerializer(serializers.ModelSerializer):
     creator = serializers.StringRelatedField()
 
-    number_of_bookings = serializers.IntegerField()
-    is_booked = serializers.BooleanField()
+    number_of_bookings = serializers.IntegerField(read_only=True)
+    is_booked = serializers.BooleanField(read_only=True)
 
     """ def get_number_of_bookings(self, event: Event):
         return event.bookings.count()
@@ -38,4 +38,3 @@ class EventSerializer(serializers.ModelSerializer):
             'creator',
             'is_booked'
         ]
-        read_only_fields = ['number_of_bookings', 'is_booked']
