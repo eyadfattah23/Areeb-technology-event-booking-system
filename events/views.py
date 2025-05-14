@@ -2,13 +2,14 @@
 from django.db.models import Exists, OuterRef, Count
 from django_filters.rest_framework import DjangoFilterBackend
 from rest_framework.filters import SearchFilter, OrderingFilter
-from rest_framework.viewsets import ModelViewSet
 from rest_framework.pagination import PageNumberPagination
+from rest_framework.permissions import IsAuthenticated
+from rest_framework.viewsets import ModelViewSet
 from .models import Event
 from .permissions import *
 from .serializers import *
-from users.models import Booking
 from .filters import EventFilter
+from users.models import Booking
 # Create your views here.
 
 
@@ -17,7 +18,7 @@ class EventViewSet(ModelViewSet):
     filter_backends = [DjangoFilterBackend, OrderingFilter, SearchFilter]
     filterset_class = EventFilter
     ordering_fields = ['price', 'date', 'time']
-    permission_classes = [IsEventOwnerOrAdmin]
+    permission_classes = [IsAdminOrReadOnly, IsAuthenticated]
     pagination_class = PageNumberPagination
     search_fields = ['title', 'description']
     serializer_class = EventSerializer

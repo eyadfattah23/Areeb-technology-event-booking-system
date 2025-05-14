@@ -10,15 +10,6 @@ class EventSerializer(serializers.ModelSerializer):
     number_of_bookings = serializers.IntegerField(read_only=True)
     is_booked = serializers.BooleanField(read_only=True)
 
-    """ def get_number_of_bookings(self, event: Event):
-        return event.bookings.count()
- """
-    """ def get_is_booked(self, event: Event):
-        request = self.context.get('request')
-        if request and request.user.is_authenticated:
-            return event.bookings.filter(user=request.user).exists()
-        return False """
-
     class Meta:
         """Meta class for EventSerializer."""
         model = Event
