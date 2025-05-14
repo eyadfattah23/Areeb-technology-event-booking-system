@@ -1,6 +1,5 @@
-
+"""Django filters for the Event model."""
 from django_filters.rest_framework import FilterSet
-from django.db import models as django_models
 from .models import *
 
 

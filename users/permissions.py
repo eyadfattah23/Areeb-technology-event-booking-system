@@ -1,3 +1,4 @@
+"""Permissions for the Booking model."""
 from rest_framework.permissions import BasePermission
 
 

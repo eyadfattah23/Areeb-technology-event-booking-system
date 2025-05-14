@@ -173,6 +173,3 @@ DJOSER = {
     },
     'HIDE_USERS': True,
 }
-
-
-""" eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0b2tlbl90eXBlIjoiYWNjZXNzIiwiZXhwIjoxNzQ3MTc5MTc3LCJpYXQiOjE3NDcxNzU2MzcsImp0aSI6ImM4ODhjOTQ2MTAyNjQxMzc4YjNjYTI4YjVkZmRmODE4IiwidXNlcl9pZCI6MTAxfQ.SqcLnnu6qpP_6egeYl0Pe1zjmRdKANPZLeAclrl5kvQ """

@@ -1,3 +1,4 @@
+"""Module Responsible for the events viewset"""
 from django.db.models import Exists, OuterRef, Count
 from django_filters.rest_framework import DjangoFilterBackend
 from rest_framework.filters import SearchFilter, OrderingFilter
@@ -12,7 +13,7 @@ from .filters import EventFilter
 
 
 class EventViewSet(ModelViewSet):
-
+    """Viewset for the Event model."""
     filter_backends = [DjangoFilterBackend, OrderingFilter, SearchFilter]
     filterset_class = EventFilter
     ordering_fields = ['price', 'date', 'time']
@@ -22,6 +23,10 @@ class EventViewSet(ModelViewSet):
     serializer_class = EventSerializer
 
     def get_queryset(self):
+        """Get the queryset for the Event model
+        This method retrieves all events and annotates them with the number of
+        bookings and whether the user has booked the event or not.
+        """
         query_set = Event.objects\
             .select_related('creator')\
             .annotate(
@@ -32,35 +37,5 @@ class EventViewSet(ModelViewSet):
         return query_set
 
     def perform_create(self, serializer):
+        """Override the perform_create method to set the creator of the event."""
         serializer.save(creator=self.request.user)
-
-
-""" 
-@api_view(['GET', 'POST'])
-def event_list(request):
-    if request.method == "GET":
-        user = request.user
-        bookings_subquery = Booking.objects.filter(
-            user=user,
-            event=OuterRef('pk'))
-
-        query_set = Event.objects.prefetch_related(
-            'bookings').select_related('creator').annotate(
-            is_booked=Exists(bookings_subquery))
-
-        serializer = EventSerializer(
-            query_set, many=True, context={'request': request})
-        return Response(serializer.data)
-    elif request.method == "POST":
-        serializer = EventSerializer(data=request.data)
-        serializer.is_valid(raise_exception=True)
-        serializer.save(creator=request.user)
-        return Response(serializer.data, status=201)
-
-
-@api_view(['GET', 'PUT', 'PATCH'])
-def event_details(request, id):
-    event = get_object_or_404(Event, pk=id)
-    serializer = EventSerializer(event, context={'request': request})
-    return Response(serializer.data)
- """

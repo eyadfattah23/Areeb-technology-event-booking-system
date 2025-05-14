@@ -1,9 +1,11 @@
+"""Serializers for the Booking and CustomUser models."""
 from .models import *
 from rest_framework import serializers
 from djoser.serializers import UserCreatePasswordRetypeSerializer, UserSerializer
 
 
 class BookingSerializer(serializers.ModelSerializer):
+    """Serializer for the Booking model."""
     event = serializers.HyperlinkedRelatedField(
         read_only=True,
         view_name='event-detail'
@@ -19,10 +21,7 @@ class BookingSerializer(serializers.ModelSerializer):
 
 
 class EventBookingSerializer(serializers.ModelSerializer):
-    """ user = serializers.HyperlinkedRelatedField(
-        read_only=True,
-        view_name='user-detail'
-    ) """
+    """Serializer for the Bookings related to an event."""
     user = serializers.StringRelatedField()
 
     class Meta:
@@ -35,6 +34,7 @@ class EventBookingSerializer(serializers.ModelSerializer):
 
 
 class CustomUserCreatePasswordRetypeSerializer(UserCreatePasswordRetypeSerializer):
+    """Serializer for creating a new user with password and re_password fields."""
     re_password = serializers.CharField(
         style={"input_type": "password"}, write_only=True)
 
@@ -51,6 +51,7 @@ class CustomUserCreatePasswordRetypeSerializer(UserCreatePasswordRetypeSerialize
 
 
 class CustomUserSerializer(UserSerializer):
+    """Serializer for the CustomUser model."""
     class Meta(UserSerializer.Meta):
         fields = [
             'id',

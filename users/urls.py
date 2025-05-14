@@ -1,4 +1,5 @@
-from django.urls import path, include
+"""Url configuration for the users app."""
+from django.urls import path
 
 
 from .views import BookingRetrieveDestroyAPIView

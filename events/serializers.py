@@ -1,8 +1,10 @@
+"""Module for serializing Event model data."""
 from rest_framework import serializers
 from .models import Event
 
 
 class EventSerializer(serializers.ModelSerializer):
+    """Serializer for the Event model."""
     creator = serializers.StringRelatedField()
 
     number_of_bookings = serializers.IntegerField(read_only=True)
@@ -18,6 +20,7 @@ class EventSerializer(serializers.ModelSerializer):
         return False """
 
     class Meta:
+        """Meta class for EventSerializer."""
         model = Event
 
         fields = [

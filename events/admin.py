@@ -1,12 +1,11 @@
+"""Module defining classes responsible for the events admin page"""
 from django.contrib import admin
-
-from datetime import timezone
 from .models import *
 from users.models import Booking
-# Register your models here.
 
 
 class EventBookingInline(admin.TabularInline):
+    """Inline class for booking in the event admin page."""
     autocomplete_fields = ['user']
     model = Booking
     extra = 1
@@ -14,6 +13,7 @@ class EventBookingInline(admin.TabularInline):
 
 @admin.register(Event)
 class EventAdmin(admin.ModelAdmin):
+    """Admin class for the Event model."""
     list_display = ['id', 'title', 'category',
                     'custom_category', 'date', 'time', 'price', 'venue', 'creator__username']
     list_select_related = ['creator']

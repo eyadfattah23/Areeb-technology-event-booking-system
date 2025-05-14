@@ -56,6 +56,7 @@ class Event(models.Model):
         AUTH_USER_MODEL, on_delete=models.SET_NULL, related_name="created_events", null=True)
 
     class Meta:
+        """Meta class for Event model."""
         ordering = ['price', 'date']
         indexes = [
             models.Index(fields=['date']),
@@ -63,6 +64,7 @@ class Event(models.Model):
         ]
 
     def __str__(self):
+        """String representation of the Event model."""
         return f"{self.title} | id: {self.id}"
 
     def clean(self):
