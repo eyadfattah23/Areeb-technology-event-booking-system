@@ -6,12 +6,13 @@ from django.urls import path, include, re_path
 import debug_toolbar
 from django.conf import settings
 from django.conf.urls.static import static
-
+from users.views import login as login_view
 admin.site.site_header = 'Areeb project admin page'
 
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('playground/', include('playground.urls')),
+    path('', login_view, name='login-home'),
     path('api/', include('events.urls')),
     path('api/', include('users.urls')),
     re_path(r'^auth/', include('djoser.urls')),

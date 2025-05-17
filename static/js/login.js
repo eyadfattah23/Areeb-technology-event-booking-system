@@ -6,11 +6,14 @@ document.querySelector('#signin-form input[type="email"]').focus();
 const loginForm = document.getElementById('signin-form');
 const signupForm = document.getElementById('signup-form');
 const baseEndpoint = "http://localhost:8000/auth";
+
 if (loginForm)
     loginForm.addEventListener('submit', handleLogin);
 
 if (signupForm)
     signupForm.addEventListener('submit', handleSignup);
+
+
 function handleLogin(event) {
     event.preventDefault();
     const submitButton = event.target.querySelector('button[type="submit"]');

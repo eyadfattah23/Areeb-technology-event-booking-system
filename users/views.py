@@ -1,5 +1,5 @@
 """Views for the Booking API."""
-from django.shortcuts import get_object_or_404
+from django.shortcuts import get_object_or_404, render
 from rest_framework.generics import RetrieveDestroyAPIView
 from rest_framework.generics import ListCreateAPIView
 from rest_framework.permissions import IsAuthenticated
@@ -29,3 +29,8 @@ class EventBookingList(ListCreateAPIView):
     def perform_create(self, serializer):
         event = get_object_or_404(Event, pk=self.kwargs['pk'])
         serializer.save(event=event, user=self.request.user)
+
+
+def login(request):
+    """Home view."""
+    return render(request, 'users/LoginForm.html')
