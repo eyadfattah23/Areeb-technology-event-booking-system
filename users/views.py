@@ -1,7 +1,8 @@
 """Views for the Booking API."""
 from django.shortcuts import get_object_or_404, render
-from rest_framework.generics import RetrieveDestroyAPIView
-from rest_framework.generics import ListCreateAPIView
+from rest_framework.generics import RetrieveDestroyAPIView, ListCreateAPIView
+from rest_framework.views import APIView
+from rest_framework.response import Response
 from rest_framework.permissions import IsAuthenticated
 from .models import Booking
 from .permissions import *
@@ -34,3 +35,12 @@ class EventBookingList(ListCreateAPIView):
 def login(request):
     """Home view."""
     return render(request, 'users/LoginForm.html')
+
+
+class MyBookingsAPIView(APIView):
+    permission_classes = [IsAuthenticated]
+
+    def get(self, request):
+        bookings = Booking.objects.filter(user=request.user)
+        serializer = MyBookingsSerializer(bookings, many=True)
+        return Response(serializer.data)

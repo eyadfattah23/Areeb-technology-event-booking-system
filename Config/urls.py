@@ -7,17 +7,20 @@ import debug_toolbar
 from django.conf import settings
 from django.conf.urls.static import static
 from users.views import login as login_view
+from events.views import event_list as event_list_view
 admin.site.site_header = 'Areeb project admin page'
 
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('playground/', include('playground.urls')),
-    path('', login_view, name='login-home'),
     path('api/', include('events.urls')),
     path('api/', include('users.urls')),
     re_path(r'^auth/', include('djoser.urls')),
     re_path(r'^auth/', include('djoser.urls.jwt')),
-    path('__debug__/', include(debug_toolbar.urls))
+    path('__debug__/', include(debug_toolbar.urls)),
+    path('', login_view, name='login-home'),
+    path('events/', event_list_view, name='events-home'),
+
 ]
 
 

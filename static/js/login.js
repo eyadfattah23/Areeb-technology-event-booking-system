@@ -5,7 +5,7 @@ document.querySelector('#signin-form input[type="email"]').focus();
 
 const loginForm = document.getElementById('signin-form');
 const signupForm = document.getElementById('signup-form');
-const baseEndpoint = "http://localhost:8000/auth";
+const baseEndpoint = "http://127.0.0.1:8000/auth";
 
 if (loginForm)
     loginForm.addEventListener('submit', handleLogin);
@@ -16,6 +16,7 @@ if (signupForm)
 
 function handleLogin(event) {
     event.preventDefault();
+
     const submitButton = event.target.querySelector('button[type="submit"]');
     submitButton.disabled = true;
     submitButton.textContent = 'Processing...';
@@ -41,17 +42,16 @@ function handleLogin(event) {
             return response.json();
         })
         .then(data => {
-            console.log(data);
 
             localStorage.setItem('access', data.access);
             localStorage.setItem('refresh', data.refresh);
 
-            window.addEventListener('beforeunload', () => {
+            /*window.addEventListener('beforeunload', () => {
                 if (!window.location.href.includes('/events')) {
                     localStorage.removeItem('access');
                     localStorage.removeItem('refresh');
                 }
-            });
+            });*/
 
             window.location.href = '/events';
         })

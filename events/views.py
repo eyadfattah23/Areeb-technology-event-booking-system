@@ -1,5 +1,6 @@
 """Module Responsible for the events viewset"""
 from django.db.models import Exists, OuterRef, Count
+from django.shortcuts import render
 from django_filters.rest_framework import DjangoFilterBackend
 from rest_framework.filters import SearchFilter, OrderingFilter
 from rest_framework.pagination import PageNumberPagination
@@ -40,3 +41,9 @@ class EventViewSet(ModelViewSet):
     def perform_create(self, serializer):
         """Override the perform_create method to set the creator of the event."""
         serializer.save(creator=self.request.user)
+
+
+def event_list(request):
+    """View for the event list."""
+    events = Event.objects.all()
+    return render(request, 'events/home.html', {'events': events})

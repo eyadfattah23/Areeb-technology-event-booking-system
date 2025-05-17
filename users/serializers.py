@@ -20,6 +20,13 @@ class BookingSerializer(serializers.ModelSerializer):
         ]
 
 
+class MyBookingsSerializer(serializers.ModelSerializer):
+    """Serializer for the Bookings of the logged-in user."""
+    class Meta:
+        model = Booking
+        fields = ['id', 'event', 'booking_date']
+
+
 class EventBookingSerializer(serializers.ModelSerializer):
     """Serializer for the Bookings related to an event."""
     user = serializers.StringRelatedField()
