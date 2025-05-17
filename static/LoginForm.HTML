@@ -16,19 +16,20 @@
     <br>
     <br>
     <div class="cont">
-        <div class="form sign-in">
+
+        <form id="signin-form" method="post">
             <h2>Welcome</h2>
             <label>
                 <span>Email</span>
-                <input type="email" required />
+                <input type="email" name="email" required>
             </label>
             <label>
                 <span>Password</span>
-                <input type="password" required />
+                <input type="password" name="password" required>
             </label>
-            <button type="button" class="submit">Sign In</button>
+            <button type="submit" class="submit">Sign In</button>
 
-        </div>
+        </form>
         <div class="sub-cont">
             <div class="img">
                 <div class="img__text m--up">
@@ -44,40 +45,39 @@
                     <span class="m--in">Sign In</span>
                 </div>
             </div>
-            <div class="form sign-up">
+            <form id="signup-form" method="post">
                 <h2>Create your Account</h2>
-
                 <label>
                     <span>Email*</span>
-                    <input type="email" required />
+                    <input type="email" name="email" required />
+                </label>
+                <label>
+                    <span>Username*</span>
+                    <input type="text" name="username" required />
                 </label>
                 <label>
                     <span>First Name</span>
-                    <input type="text" />
+                    <input type="text" name="first_name" />
                 </label>
                 <label>
                     <span>Last Name</span>
-                    <input type="text" />
+                    <input type="text" name="last_name" />
                 </label>
                 <label>
                     <span>Password*</span>
-                    <input type="password" required />
+                    <input type="password" name="password" required />
                 </label>
                 <label>
                     <span>Confirm Password*</span>
-                    <input type="password" required />
+                    <input type="password" name="re_password" required />
                 </label>
-                <button type="button" class="submit">Sign Up</button>
+                <button type="submit" class="submit">Sign Up</button>
 
-            </div>
+            </form>
         </div>
     </div>
 
-    <script>
-        document.querySelector('.img__btn').addEventListener('click', function () {
-            document.querySelector('.cont').classList.toggle('s--signup');
-        });
-    </script>
+    <script src="./js/login.js"></script>
 </body>
 
 </html>
