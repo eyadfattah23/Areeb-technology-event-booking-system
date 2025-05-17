@@ -20,6 +20,7 @@ urlpatterns = [
     path('__debug__/', include(debug_toolbar.urls)),
     path('', login_view, name='login-home'),
     path('events/', event_list_view, name='events-home'),
+    path('logout/', event_list_view, name='logout'),
 
 ]
 

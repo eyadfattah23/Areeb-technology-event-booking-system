@@ -120,3 +120,12 @@ function handleSignup(event) {
         });
 
 }
+
+function handleLogout() {
+    localStorage.removeItem('access');
+    localStorage.removeItem('refresh');
+}
+
+document.querySelectorAll('.logout-btn').forEach(btn => {
+    btn.addEventListener('click', handleLogout);
+});

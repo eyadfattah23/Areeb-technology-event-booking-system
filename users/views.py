@@ -1,4 +1,7 @@
 """Views for the Booking API."""
+from django.views.decorators.http import require_http_methods
+from django.contrib.auth import logout as auth_logout
+from django.shortcuts import redirect
 from django.shortcuts import get_object_or_404, render
 from rest_framework.generics import RetrieveDestroyAPIView, ListCreateAPIView
 from rest_framework.views import APIView
@@ -32,11 +35,6 @@ class EventBookingList(ListCreateAPIView):
         serializer.save(event=event, user=self.request.user)
 
 
-def login(request):
-    """Home view."""
-    return render(request, 'users/LoginForm.html')
-
-
 class MyBookingsAPIView(APIView):
     permission_classes = [IsAuthenticated]
 
@@ -44,3 +42,17 @@ class MyBookingsAPIView(APIView):
         bookings = Booking.objects.filter(user=request.user)
         serializer = MyBookingsSerializer(bookings, many=True)
         return Response(serializer.data)
+
+
+def login(request):
+    """Home view."""
+    return render(request, 'users/LoginForm.html')
+
+
+@require_http_methods(["GET"])
+def logout_view(request):
+    """Handle user logout by clearing session and redirecting"""
+    auth_logout(request)
+    response = redirect('/login')
+    response.delete_cookie('access_token')
+    return response
