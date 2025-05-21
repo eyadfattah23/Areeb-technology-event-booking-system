@@ -571,3 +571,5 @@ POST /api/events/{id}/bookings/   → create booking for current user
 * `/events` : EventHub main interface listing all events. (can only be accessed by a logged-in users)
 
 * **Admin panel** (`/admin/`) is fully implemented without AI assistance.
+---
+Final note: playground app is just a playground for testing and not part of the project, use it wisely.
